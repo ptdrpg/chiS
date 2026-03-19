@@ -80,8 +80,6 @@ func COnnexion() {
 		handler.ErrorHandler(err)
 	}
 	if db != "sqlite" {
-		app.Write([]byte(sql))
-	} else {
 		variableEnv := `DB_HOST=localhost
 	DB_USER=dbusername
 	DB_PASSWORD=dbpassword
@@ -95,6 +93,8 @@ func COnnexion() {
 		}
 		env.Write([]byte(variableEnv))
 		env.Close()
+		app.Write([]byte(sql))
+	} else {
 		app.Write([]byte(sqlLite))
 	}
 	app.Close()
